@@ -1,0 +1,22 @@
+---
+
+- name: Run Docker container from image
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure docker is running
+      service:
+        name: docker.service
+        state: started
+        enabled: true
+      become: true
+
+    - name: Run Docker Container
+      docker_container:
+        name: webapp
+        image: webapp
+        state: started
+        published_ports:
+          - "80:80"
+        restart_policy: always
+      become: true
