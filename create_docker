@@ -1,0 +1,23 @@
+---
+
+
+- name: Create Docker Image
+  hosts: all
+  become: true
+  tasks:
+
+
+    - name: Copy Dockerfile to the remote host
+      copy:
+        src: Dockerfile
+        dest: /home/dldperez
+
+    - name: Cp files from control to remote host
+      copy:
+        src: ./front-end/
+        dest: /home/dldperez
+
+    - name: Build Docker Image
+      command: docker build -t group2 /home/dldperez
+      args:
+        chdir: /home/dldperez

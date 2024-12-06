@@ -30,20 +30,20 @@
       become: true
 
 
-    - name: Install required dependencies (Centos)
-      dnf:
-        name:
-          - yum-utils
-          - device-mapper-persistent-data
-          - lvm2
+    - name: Install Epel repository (Centos)
+      yum:
+        name: epel-release
         state: present
       when: ansible_distribution == "CentOS"
 
-    - name: Install required dependencies (Centos)
-      dnf:
-        name:
-          - yum-utils
-          - device-mapper-persistent-data
-          - lvm2
+    - name: Install docker.io packages (Centos)
+      yum:
+        name: docker.io
         state: present
       when: ansible_distribution == "CentOS"
+
+    - name: Start and Enable Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes

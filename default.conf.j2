@@ -1,11 +1,11 @@
 server {
     listen 80;
+    server_name localhost;
+    root /usr/share/nginx/html;
+    index home.html profile.html portfolio.html
 
     location / {
-        root /usr/share/nginx/html  
-        #This is where the nginx gets the html files
-        
-        index home.html profile.html portfolio.html;
-        #These are the html files for our portfolios.
-    }
+          
+        try_files $uri $uri/ =404;
+          }
 }

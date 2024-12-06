@@ -1,3 +1,4 @@
+
 ---
 
 - name: Run Docker container from image
@@ -9,14 +10,12 @@
         name: docker.service
         state: started
         enabled: true
-      become: true
 
     - name: Run Docker Container
       docker_container:
-        name: webapp
-        image: webapp
+        name: container
+        image: group2
         state: started
         published_ports:
           - "80:80"
         restart_policy: always
-      become: true
