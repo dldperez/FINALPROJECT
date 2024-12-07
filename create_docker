@@ -14,10 +14,19 @@
 
     - name: Cp files from control to remote host
       copy:
-        src: ./front-end/
+        src: ./front-end
         dest: /home/dldperez
 
+
     - name: Build Docker Image
-      command: docker build -t group2 /home/dldperez
+      command: docker build -t group2portfolio /home/dldperez
       args:
         chdir: /home/dldperez
+      when: ansible_distribution=="Ubuntu"
+
+    - name: Build Docker Image
+      command: docker build --no-cache -t group2portfolios .
+      args:
+        chdir: /home/dldperez
+      when: ansible_distribution=="CentOS"
+

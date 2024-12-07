@@ -13,9 +13,20 @@
 
     - name: Run Docker Container
       docker_container:
-        name: container
-        image: group2
+        name: portfoliocontainer
+        image: group2portfolio
         state: started
         published_ports:
           - "80:80"
         restart_policy: always
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Run Docker Container
+      docker_container:
+        name: portfoliocontainer
+        image: group2portfolios:latest
+        state: started
+        published_ports:
+          - "80:80"
+        restart_policy: always
+      when: ansible_distribution == "CentOS"
